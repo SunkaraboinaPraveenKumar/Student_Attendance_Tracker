@@ -1,4 +1,5 @@
 "use client"
+import { useUser } from '@clerk/nextjs';
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 import { GraduationCap, LayoutIcon, Hand, Settings } from 'lucide-react';
 import Image from 'next/image';
@@ -7,7 +8,7 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 
 function SideNav() {
-  const { user } = useKindeBrowserClient();
+  const { user } = useUser();
   const MenuList = [
     {
       id: 1,
@@ -60,12 +61,12 @@ function SideNav() {
 
       {/* User Info Section */}
       <div className='flex gap-2 items-center bottom-5 fixed p-2 bg-white dark:bg-gray-900 w-90%'>
-        <Image src={user?.picture || '/default-avatar.png'} width={35} height={35} alt='user' className='rounded-full' />
+        <Image src={user?.imageUrl || '/default-avatar.png'} width={35} height={35} alt='user' className='rounded-full' />
         <div>
           <h2 className='text-sm font-bold text-black dark:text-white'>
             {user?.given_name} {user?.family_name}
           </h2>
-          <h2 className='text-xs text-slate-400 dark:text-gray-400'>{user?.email}</h2>
+          <h2 className='text-xs text-slate-400 dark:text-gray-400'>{user?.primaryEmailAddress?.emailAddress}</h2>
         </div>
       </div>
     </div>

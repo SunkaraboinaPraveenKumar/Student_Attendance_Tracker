@@ -1,11 +1,11 @@
 "use client"
 import React, { useState } from 'react';
 import { useTheme } from 'next-themes'; // For theme switching
-import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
+import { useUser } from '@clerk/nextjs';
 
 function Settings() {
   const { setTheme, theme } = useTheme(); // Get theme setter and current theme
-  const { user } = useKindeBrowserClient(); // Get authenticated user
+  const { user } = useUser();
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
 
   return (
@@ -32,7 +32,7 @@ function Settings() {
               type="email"
               className="mt-1 block w-full p-2 border rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               placeholder="Email Address"
-              value={user?.email || ''} // Display user's email from Kinde
+              value={user?.primaryEmailAddress?.emailAddress || ''} // Display user's email from Kinde
               disabled
             />
           </label>

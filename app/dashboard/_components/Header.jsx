@@ -4,22 +4,22 @@ import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 import Image from 'next/image';
 import React from 'react';
 import { SunIcon, MoonIcon } from '@heroicons/react/24/solid';
+import { UserButton, useUser } from '@clerk/nextjs';
 
 function Header() {
-  const { user } = useKindeBrowserClient(); // Get authenticated user
+  const { user } = useUser();
   const { theme, setTheme } = useTheme(); // Get current theme and setter
 
   return (
     <div className='p-4 shadow-sm border flex justify-between items-center'>
       {/* User Section */}
       <div className='flex items-center gap-2'>
-        <Image
-          src={user?.picture || '/default-avatar.png'} // Default avatar if user picture is not available
-          height={35}
-          width={35}
-          alt='user'
-          className='rounded-full'
-        />
+        {
+          user?
+          <UserButton/>
+          :
+          <Image src={'/logo.png'} height={50} width={50}/>
+        }
       </div>
 
       {/* Theme Toggle Section */}

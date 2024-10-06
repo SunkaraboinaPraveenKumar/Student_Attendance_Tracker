@@ -11,6 +11,7 @@
     "db:studio": "npx drizzle-kit studio"
   },
   "dependencies": {
+    "@clerk/nextjs": "^5.7.1",
     "@heroicons/react": "^2.1.5",
     "@kinde-oss/kinde-auth-nextjs": "^2.3.10",
     "@neondatabase/serverless": "^0.9.5",

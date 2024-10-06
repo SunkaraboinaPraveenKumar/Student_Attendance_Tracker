@@ -1,16 +1,12 @@
-"use client";
-import { useEffect } from "react";
-import { redirect } from "next/navigation";
-import { useSession } from "@kinde-oss/kinde-auth-nextjs/client";
+"use client"
+import Header from "./dashboard/_components/Header";
+import Hero from "./dashboard/_components/Hero";
 
 export default function Home() {
-  const { isAuthenticated, isLoading } = useSession();
-
-  useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      redirect('/api/auth/login?post_login_redirect_url=/dashboard');
-    }
-  }, [isLoading, isAuthenticated]);
-
-  return <div />;
+  return (
+    <div>
+      <Header/>
+      <Hero/>
+    </div>
+  );
 }
