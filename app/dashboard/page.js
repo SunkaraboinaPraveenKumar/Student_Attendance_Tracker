@@ -35,7 +35,6 @@ function Dashboard() {
     }
   };
 
-
   const GetTotalPresentCountByday = () => {
     GlobaAPI.TotalPresentCountByday(selectedGrade, moment(selectedMonth).format('MM/yyyy'))
       .then(resp => {
@@ -48,15 +47,15 @@ function Dashboard() {
 
   return (
     <div className='p-10'>
-      <div className='flex items-center justify-between'>
+      <div className='flex flex-col md:flex-row items-center justify-between mb-5'>
         <h2 className='font-bold text-2xl'>Dashboard</h2>
-        <div className='flex items-center gap-4'>
-          <MonthSelection selectedMonth={(v)=>setSelectedMonth(v)} />
+        <div className='flex flex-wrap items-center gap-4 mt-4 md:mt-0'>
+          <MonthSelection selectedMonth={(v) => setSelectedMonth(v)} />
           <GradeSelect selectedGrade={(v) => setSelectedGrade(v)} />
         </div>
       </div>
       <StatusList attendanceList={attendanceList} selectedGrade={selectedGrade} selectedMonth={selectedMonth} />
-      <div className='grid grid-cols-1 md:grid-cols-1 gap-5'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
         <div>
           <BarChartComponent attendanceList={attendanceList} totalPresentList={totalPresentData} />
         </div>
