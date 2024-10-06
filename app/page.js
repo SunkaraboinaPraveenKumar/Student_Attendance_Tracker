@@ -1,19 +1,16 @@
-"use client"
-import { useEffect, useState } from "react";
+"use client";
+import { useEffect } from "react";
 import { redirect } from "next/navigation";
+import { useSession } from "@kinde-oss/kinde-auth-nextjs/client";
 
 export default function Home() {
-  const [mounted, setMounted] = useState(false);
+  const { isAuthenticated, isLoading } = useSession();
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (mounted) {
+    if (!isLoading && !isAuthenticated) {
       redirect('/api/auth/login?post_login_redirect_url=/dashboard');
     }
-  }, [mounted]);
+  }, [isLoading, isAuthenticated]);
 
   return <div />;
 }
